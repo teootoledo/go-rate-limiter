@@ -1,0 +1,1034 @@
+{
+	"info": {
+		"_postman_id": "d38f3d14-fba8-4dc9-b7af-9b851c26c7ec",
+		"name": "RATE-LIMITER",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19838960"
+	},
+	"item": [
+		{
+			"name": "Integration tests",
+			"item": [
+				{
+					"name": "[1]. Request params validation",
+					"item": [
+						{
+							"name": "[1.1]. Missing body field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test(\"Response status code is 400\", function () {",
+											"    pm.expect(pm.response.code).to.equal(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has the required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData).to.have.property('error-response');",
+											"    pm.expect(responseData['error-response']).to.have.property('message');",
+											"    pm.expect(responseData['error-response']).to.have.property('details');",
+											"});",
+											"",
+											"",
+											"pm.test(\"Message is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Details is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"subject\": \"good news!\",\n    \"type\": \"status\",\n    \"recipient\": \"example@modak.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/v1/mail",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"v1",
+										"mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[1.2]. Missing subject field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test(\"Response status code is 400\", function () {",
+											"    pm.expect(pm.response.code).to.equal(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has the required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData).to.have.property('error-response');",
+											"    pm.expect(responseData['error-response']).to.have.property('message');",
+											"    pm.expect(responseData['error-response']).to.have.property('details');",
+											"});",
+											"",
+											"",
+											"pm.test(\"Message is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Details is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"body\": \"example body\",\n    \"type\": \"status\",\n    \"recipient\": \"example@modak.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/v1/mail",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"v1",
+										"mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[1.3]. Missing type field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test(\"Response status code is 400\", function () {",
+											"    pm.expect(pm.response.code).to.equal(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has the required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData).to.have.property('error-response');",
+											"    pm.expect(responseData['error-response']).to.have.property('message');",
+											"    pm.expect(responseData['error-response']).to.have.property('details');",
+											"});",
+											"",
+											"",
+											"pm.test(\"Message is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Details is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/v1/mail",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"v1",
+										"mail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[1.4]. Missing recipient field",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"",
+											"pm.test(\"Response status code is 400\", function () {",
+											"    pm.expect(pm.response.code).to.equal(400);",
+											"});",
+											"",
+											"",
+											"pm.test(\"Response has the required fields\", function () {",
+											"    const responseData = pm.response.json();",
+											"    ",
+											"    pm.expect(responseData).to.be.an('object');",
+											"    pm.expect(responseData).to.have.property('error-response');",
+											"    pm.expect(responseData['error-response']).to.have.property('message');",
+											"    pm.expect(responseData['error-response']).to.have.property('details');",
+											"});",
+											"",
+											"",
+											"pm.test(\"Message is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].message).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Message should not be empty\");",
+											"});",
+											"",
+											"",
+											"pm.test(\"Details is a non-empty string\", function () {",
+											"  const responseData = pm.response.json();",
+											"  ",
+											"  pm.expect(responseData).to.be.an('object');",
+											"  pm.expect(responseData[\"error-response\"].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+											"});",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"body\": \"example body\",\n    \"type\": \"status\",\n    \"subject\": \"this is the subject\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base-url}}/v1/mail",
+									"host": [
+										"{{base-url}}"
+									],
+									"path": [
+										"v1",
+										"mail"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "[2]. Rate limiting",
+					"item": [
+						{
+							"name": "[2.1]. Not accepted type",
+							"item": [
+								{
+									"name": "[2.1]. No rate limit set for the given type",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test('Response status code is 429', function () {",
+													"    pm.expect(pm.response.code).to.equal(429);",
+													"});",
+													"",
+													"pm.test('Response has the required fields - message and details', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData['error-response']).to.exist.and.to.be.an('object');",
+													"    pm.expect(responseData['error-response'].message).to.exist;",
+													"    pm.expect(responseData['error-response'].details).to.exist;",
+													"});",
+													"",
+													"pm.test('Message is a non-empty string', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData['error-response'].message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Message should not be empty');",
+													"});",
+													"",
+													"pm.test(\"Details is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData[\"error-response\"].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Details should not be empty\");",
+													"    pm.expect(responseData[\"error-response\"].details).to.be.equal(\"no rate limit set for the given type\")",
+													"});",
+													"",
+													"pm.test('Content-Type header is application/json', function () {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										},
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"invalid\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "[2.2]. Status mails",
+							"item": [
+								{
+									"name": "[2.2.1]. Status mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"status\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.2.2]. Status second mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"status\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.2.3]. Status third mail rejected",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test('Response status code is 429', function () {",
+													"    pm.expect(pm.response.code).to.equal(429);",
+													"})",
+													"",
+													"pm.test('Response has the required fields', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData).to.have.property('error-response').that.is.an('object');",
+													"    pm.expect(responseData['error-response']).to.have.property('message');",
+													"    pm.expect(responseData['error-response']).to.have.property('details');",
+													"    pm.expect(responseData).to.have.property('status-code');",
+													"})",
+													"",
+													"pm.test('Message is a non-empty string', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData['error-response'].message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Message should not be empty');",
+													"    pm.expect(responseData['error-response'].message).to.be.equal('too many requests')",
+													"})",
+													"",
+													"pm.test(\"Details is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData['error-response'].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Details should not be empty\");",
+													"    pm.expect(responseData['error-response'].details).to.be.equal('rate limit exceeded')",
+													"});",
+													"",
+													"pm.test('Content-Type header is application/json', function () {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+													"})",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"status\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "[2.3]. News mails",
+							"item": [
+								{
+									"name": "[2.3.1]. News mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"news\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.3.2]. News second mail rejected",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test('Response status code is 429', function () {",
+													"    pm.expect(pm.response.code).to.equal(429);",
+													"})",
+													"",
+													"pm.test('Response has the required fields', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData).to.have.property('error-response').that.is.an('object');",
+													"    pm.expect(responseData['error-response']).to.have.property('message');",
+													"    pm.expect(responseData['error-response']).to.have.property('details');",
+													"    pm.expect(responseData).to.have.property('status-code');",
+													"})",
+													"",
+													"pm.test('Message is a non-empty string', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData['error-response'].message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Message should not be empty');",
+													"    pm.expect(responseData['error-response'].message).to.be.equal('too many requests')",
+													"})",
+													"",
+													"pm.test(\"Details is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData['error-response'].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Details should not be empty\");",
+													"    pm.expect(responseData['error-response'].details).to.be.equal('rate limit exceeded')",
+													"});",
+													"",
+													"pm.test('Content-Type header is application/json', function () {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+													"})",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"news\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "[2.4]. Marketing mails",
+							"item": [
+								{
+									"name": "[2.4.1]. Marketing mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"marketing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.4.2]. Marketing second mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"marketing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.4.3]. Marketing third mail sent",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"",
+													"pm.test(\"Response status code is 200\", function () {",
+													"  pm.expect(pm.response.code).to.equal(200);",
+													"});",
+													"",
+													"",
+													"pm.test(\"Response has the required fields - body, recipient, subject, and type\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.have.property('body');",
+													"    pm.expect(responseData).to.have.property('recipient');",
+													"    pm.expect(responseData).to.have.property('subject');",
+													"    pm.expect(responseData).to.have.property('type');",
+													"});",
+													"",
+													"",
+													"pm.test(\"Body is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData.body).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Value should not be empty\");",
+													"});",
+													"",
+													"",
+													"pm.test(\"Recipient is in a valid email format\", function () {",
+													"  const responseData = pm.response.json();",
+													"  ",
+													"  pm.expect(responseData).to.be.an('object');",
+													"  pm.expect(responseData.recipient).to.match(/^[\\w-]+(\\.[\\w-]+)*@([\\w-]+\\.)+[a-zA-Z]{2,7}$/);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"marketing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "[2.4.4]. Marketing fourth mail rejected",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test('Response status code is 429', function () {",
+													"    pm.expect(pm.response.code).to.equal(429);",
+													"})",
+													"",
+													"pm.test('Response has the required fields', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData).to.be.an('object');",
+													"    pm.expect(responseData).to.have.property('error-response').that.is.an('object');",
+													"    pm.expect(responseData['error-response']).to.have.property('message');",
+													"    pm.expect(responseData['error-response']).to.have.property('details');",
+													"    pm.expect(responseData).to.have.property('status-code');",
+													"})",
+													"",
+													"pm.test('Message is a non-empty string', function () {",
+													"    const responseData = pm.response.json();",
+													"    pm.expect(responseData['error-response'].message).to.be.a('string').and.to.have.lengthOf.at.least(1, 'Message should not be empty');",
+													"    pm.expect(responseData['error-response'].message).to.be.equal('too many requests')",
+													"})",
+													"",
+													"pm.test(\"Details is a non-empty string\", function () {",
+													"    const responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData['error-response'].details).to.be.a('string').and.to.have.lengthOf.at.least(1, \"Details should not be empty\");",
+													"    pm.expect(responseData['error-response'].details).to.be.equal('rate limit exceeded')",
+													"});",
+													"",
+													"pm.test('Content-Type header is application/json', function () {",
+													"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+													"})",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"body\": \"example body\",\n    \"subject\": \"this is a subject\",\n    \"recipient\": \"example@modak.com\",\n    \"type\": \"marketing\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{base-url}}/v1/mail",
+											"host": [
+												"{{base-url}}"
+											],
+											"path": [
+												"v1",
+												"mail"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
