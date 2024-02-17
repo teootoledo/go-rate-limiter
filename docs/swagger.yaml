@@ -1,0 +1,90 @@
+basePath: /v1
+definitions:
+  resources.ErrorResponse:
+    description: Error base info.
+    properties:
+      details:
+        example: error details
+        type: string
+      message:
+        example: status code message
+        type: string
+    type: object
+  resources.ErrorResponseHTTPBadRequest:
+    description: Error response for http BadRequest.
+    properties:
+      error-response:
+        $ref: '#/definitions/resources.ErrorResponse'
+      status-code:
+        example: 400
+        type: integer
+    type: object
+  resources.ErrorResponseHTTPTooManyRequests:
+    description: Error response for http TooManyRequests.
+    properties:
+      error-response:
+        $ref: '#/definitions/resources.ErrorResponse'
+      status-code:
+        example: 429
+        type: integer
+    type: object
+  resources.SendMailRequest:
+    properties:
+      body:
+        type: string
+      recipient:
+        type: string
+      subject:
+        type: string
+      type:
+        enum:
+        - status
+        - news
+        - marketing
+        type: string
+    required:
+    - body
+    - recipient
+    - subject
+    - type
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: teootoledo@gmail.com
+    name: Teo Martin Toledo
+  description: Rate Limiter challenge for Modak
+  title: NotificationService API (Rate Limiting)
+  version: 1.0.0
+paths:
+  /mail:
+    post:
+      consumes:
+      - application/json
+      description: Allows to email a recipient with a subject and body
+      parameters:
+      - description: Mail details
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/resources.SendMailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/resources.SendMailRequest'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/resources.ErrorResponseHTTPBadRequest'
+        "429":
+          description: Too Many Requests
+          schema:
+            $ref: '#/definitions/resources.ErrorResponseHTTPTooManyRequests'
+      summary: Send mail
+      tags:
+      - mail
+swagger: "2.0"
