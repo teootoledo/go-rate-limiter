@@ -1,0 +1,16 @@
+version: "3.9"
+
+networks:
+  rateLimiter-net:
+    driver: bridge
+
+services:
+  api:
+    container_name: rateLimiter
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    networks:
+      - rateLimiter-net
