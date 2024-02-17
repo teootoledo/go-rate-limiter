@@ -3,18 +3,12 @@ package config
 import "os"
 
 type Configuration struct {
-	ServerPort       string
-	ExecutionMode    string
-	LocalEnvironment string
+	ServerPort string
 }
 
 const (
-	ServerPort              = "SERVER_PORT"
-	DefaultServerPort       = "8090"
-	ExecutionMode           = "EXECUTION_MODE"
-	DefaultExecutionMode    = "default"
-	LocalEnvironment        = "LOCAL_ENVIRONMENT"
-	DefaultLocalEnvironment = "default"
+	ServerPort        = "SERVER_PORT"
+	DefaultServerPort = "8080"
 )
 
 var config *Configuration
@@ -29,9 +23,7 @@ func GetConfig() *Configuration {
 
 func initConfig() *Configuration {
 	return &Configuration{
-		ServerPort:       getEnvOrDefault(ServerPort, DefaultServerPort),
-		ExecutionMode:    getEnvOrDefault(ExecutionMode, DefaultExecutionMode),
-		LocalEnvironment: getEnvOrDefault(LocalEnvironment, DefaultLocalEnvironment),
+		ServerPort: getEnvOrDefault(ServerPort, DefaultServerPort),
 	}
 }
 
